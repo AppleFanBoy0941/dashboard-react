@@ -1,12 +1,17 @@
-import useLocalStorage from './hooks/useLocalStorage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Layout from './Layout';
+import Home from './pages/Home';
 
 function App() {
-	const [count, setCount] = useLocalStorage('count', 0);
 	return (
-		<div className="App">
-			<h1>{count}</h1>
-			<button onClick={() => setCount(count + 1)}>+</button>
-		</div>
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<Layout />}>
+					<Route index element={<Home />} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
