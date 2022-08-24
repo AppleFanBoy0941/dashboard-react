@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
-const Input = ({ label, value, setValue, error }) => {
+const Input = ({ label, value, setValue, error, type }) => {
 	const [isFocused, setIsFocused] = useState(false);
 
 	const labelVariants = {
@@ -19,7 +19,17 @@ const Input = ({ label, value, setValue, error }) => {
 	};
 
 	return (
-		<label className="relative px-4 pt-5 pb-1 bg-slate-50 rounded-md border border-slate-200">
+		<label
+			className={`relative px-4 pt-5 pb-1 ${
+				error ? 'bg-red-50' : 'bg-slate-50'
+			} rounded-md border ${
+				isFocused
+					? 'border-slate-400'
+					: error
+					? 'border-red-400'
+					: 'border-slate-200'
+			} transition-all`}
+		>
 			<motion.span
 				variants={labelVariants}
 				animate={isFocused ? 'animate' : 'initial'}
@@ -30,7 +40,7 @@ const Input = ({ label, value, setValue, error }) => {
 			</motion.span>
 			<input
 				className="w-full bg-transparent text-slate-800 focus:outline-none"
-				type="text"
+				type={type || 'text'}
 				value={value}
 				onChange={e => setValue(e.target.value)}
 				onFocus={() => setIsFocused(true)}

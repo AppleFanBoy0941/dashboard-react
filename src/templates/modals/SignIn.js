@@ -64,7 +64,12 @@ const SignIn = ({ setState, isOpen, setLS }) => {
 				</p>
 				<form className="flex flex-col mt-4 gap-2" onSubmit={handleSubmit}>
 					<Input label="Username" value={username} setValue={setUsername} />
-					<Input label="Password" value={password} setValue={setPassword} />
+					<Input
+						label="Password"
+						value={password}
+						setValue={setPassword}
+						type="password"
+					/>
 					<button>Sign In</button>
 				</form>
 			</motion.div>
