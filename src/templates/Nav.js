@@ -84,7 +84,9 @@ const Nav = () => {
               }}
             >
               <section className="flex items-center mb-8">
-                <div className="w-16 h-16 rounded-full bg-slate-400 mr-3"></div>
+                <div className="flex justify-center items-center w-16 h-16 rounded-full bg-slate-400 mr-3">
+                  <img src="./X-ray.png" alt="site icon" />
+                </div>
                 <div>
                   <h3>Lærevenlige Slåmidler</h3>
                   <p>laervenligeslaamidler@slag.dk</p>
