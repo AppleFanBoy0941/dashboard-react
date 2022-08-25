@@ -4,6 +4,7 @@ import useLocalStorage from './hooks/useLocalStorage';
 import { useEffect, useState } from 'react';
 import SignIn from './templates/modals/SignIn';
 import { AnimatePresence } from 'framer-motion';
+import NotificationCenter from './templates/NotificationCenter';
 
 const Layout = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -15,6 +16,7 @@ const Layout = () => {
 
 	return (
 		<div className="flex flex-col lg:flex-row">
+			<NotificationCenter />
 			<Nav />
 			<div className="container">
 				efoeofwjf fewfoewfjekfew efewfewofewjff ewfewfoewfojefwe foefeofew

@@ -1,8 +1,12 @@
 import { motion } from 'framer-motion';
 import Input from '../../components/subcomponents/Input';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import Button from '../../components/Button';
+import FeatherIcon from 'feather-icons-react';
+import NotificationContext from '../../context/NotificationContext';
 
 const SignIn = ({ setState, isOpen, setLS }) => {
+	const { notifications, setNotifications } = useContext(NotificationContext);
 	const handleSubmit = e => {
 		e.preventDefault();
 		console.log('submitted');
@@ -44,6 +48,23 @@ const SignIn = ({ setState, isOpen, setLS }) => {
 	};
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+
+	const addNotification = (type, title, body) => {
+		console.log('notification');
+		setNotifications([
+			...notifications,
+			{
+				type,
+				title,
+				body,
+				id:
+					notifications.length > 0
+						? Math.max(...notifications.map(n => n.id)) + 1
+						: 0,
+			},
+		]);
+	};
+
 	return (
 		<motion.div
 			variants={containerVariants}
@@ -63,14 +84,35 @@ const SignIn = ({ setState, isOpen, setLS }) => {
 					Venligst log ind, før du kan få adgang til Lærevenlige Slåmidler
 				</p>
 				<form className="flex flex-col mt-4 gap-2" onSubmit={handleSubmit}>
-					<Input label="Username" value={username} setValue={setUsername} />
+					<Input label="Brugernavn" value={username} setValue={setUsername} />
 					<Input
-						label="Password"
+						label="Adgangskode"
 						value={password}
 						setValue={setPassword}
 						type="password"
 					/>
-					<button>Sign In</button>
+					<div className="flex justify-between items-center mt-4">
+						<button
+							type="button"
+							className="flex items-center text-sm gap-2 p-2 transition text-slate-400 hover:bg-slate-400/10 rounded-lg"
+							onClick={() =>
+								addNotification(
+									'info',
+									'Info',
+									'Du har ikke adgang til denne funktion'
+								)
+							}
+						>
+							<FeatherIcon icon="help-circle" />
+							Glemt adgangskode?
+						</button>
+						<Button
+							type="submit"
+							text="Log ind"
+							icon="chevron-right"
+							iconRight
+						/>
+					</div>
 				</form>
 			</motion.div>
 		</motion.div>
