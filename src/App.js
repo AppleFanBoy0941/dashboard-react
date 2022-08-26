@@ -1,4 +1,5 @@
 import useLocalStorage from "./hooks/useLocalStorage";
+import Bestillinger from "./pages/Bestillinger";
 import Nav from "./templates/Nav";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
   return (
     <div className="App">
       <Nav />
+      <Bestillinger />
       <h1>{count}</h1>
       <button onClick={() => setCount(count + 1)}>+</button>
     </div>
