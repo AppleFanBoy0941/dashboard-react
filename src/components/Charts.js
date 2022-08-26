@@ -4,7 +4,14 @@ import ReactFC from "react-fusioncharts";
 import FusionCharts, { render } from "fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+import useFetch from "../hooks/useFetch";
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
+
+const { data, isLoading, error } = useFetch(
+  "http://localhost:3001/auth/orders"
+);
+
+console.log(data);
 
 const chartData = [
   {
