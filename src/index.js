@@ -9,7 +9,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<App />}>
+          <Route path="/kunder" element={<App />} />
+          <Route path="/varer" element={<App />} />
+          <Route path="/bestillinger" element={<App />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
