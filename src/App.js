@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import Layout from "./Layout";
 import Home from "./pages/Home";
+import Bestillinger from "./pages/Bestillinger";
 import TokenContext from "./context/TokenContext";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
+              <Route path="/bestillinger" element={<Bestillinger />} />
             </Route>
           </Routes>
         </BrowserRouter>
