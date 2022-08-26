@@ -4,12 +4,10 @@ import BurgerMenu from '../components/BurgerMenu';
 import NavLinkItem from '../components/subcomponents/NavLinkItem';
 import QuickActions from './subTemplates/QuickActions';
 const Nav = () => {
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	const [isOpen, setIsOpen] = useState(windowWidth > 768);
+	const [isOpen, setIsOpen] = useState(window.innerWidth >= 768);
 	useEffect(() => {
 		window.addEventListener('resize', () => {
-			setWindowWidth(window.innerWidth);
-			setIsOpen(windowWidth > 768);
+			setIsOpen(window.innerWidth >= 768);
 		});
 	}, []);
 
