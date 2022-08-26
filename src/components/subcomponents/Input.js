@@ -1,19 +1,19 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
-const Input = ({ label, value, setValue, error, type }) => {
+const Input = ({ label, value, setValue, error, type, id }) => {
 	const [isFocused, setIsFocused] = useState(false);
 
 	const labelVariants = {
 		initial: {
 			top: '50%',
 			translateY: '-50%',
+			fontSize: '16px',
 		},
 		animate: {
-			top: 0,
+			top: 2,
 			translateY: 0,
-			scale: 0.6,
-			x: -15,
+			fontSize: '12px',
 			opacity: 0.75,
 		},
 	};
@@ -45,6 +45,8 @@ const Input = ({ label, value, setValue, error, type }) => {
 				onChange={e => setValue(e.target.value)}
 				onFocus={() => setIsFocused(true)}
 				onBlur={() => !value && setIsFocused(false)}
+				id={id}
+				name={id}
 			/>
 		</label>
 	);

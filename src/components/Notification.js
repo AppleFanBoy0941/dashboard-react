@@ -26,10 +26,22 @@ const Notification = ({
 			animate={{ y: 0, opacity: 1 }}
 			exit={{ y: -120, opacity: 0 }}
 			id={id}
-			className="border border-slate-200 rounded-lg bg-slate-100"
+			className="border border-slate-200 rounded-lg bg-slate-100 w-96"
 		>
-			<div className="flex items-start gap-2 p-4">
+			<div
+				className="grid items-start gap-2 p-4"
+				style={{ gridTemplateColumns: '24px 1fr' }}
+			>
 				<FeatherIcon
+					className={`${
+						type === 'success'
+							? 'text-green-500'
+							: type === 'error'
+							? 'text-red-500'
+							: type === 'warning'
+							? 'text-yellow-500'
+							: 'text-slate-500'
+					}`}
 					icon={
 						type === 'error'
 							? `alert-circle`
@@ -41,8 +53,8 @@ const Notification = ({
 					}
 				/>
 				<div>
-					<h3 className="font-bold">{title}</h3>
-					<p>{body}</p>
+					<h3 className="font-bold mb-2 text-slate-800">{title}</h3>
+					<p className="text-slate-600">{body}</p>
 				</div>
 			</div>
 			{callback && (

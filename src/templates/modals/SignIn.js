@@ -4,15 +4,12 @@ import { useState, useContext } from 'react';
 import Button from '../../components/Button';
 import FeatherIcon from 'feather-icons-react';
 import NotificationContext from '../../context/NotificationContext';
+import TokenContext from '../../context/TokenContext';
 
-const SignIn = ({ setState, isOpen, setLS }) => {
+const SignIn = () => {
 	const { notifications, setNotifications } = useContext(NotificationContext);
-	const handleSubmit = e => {
-		e.preventDefault();
-		console.log('submitted');
-		setLS(true);
-		setState(true);
-	};
+	const { setToken } = useContext(TokenContext);
+
 	const containerVariants = {
 		initial: {
 			opacity: 0,
@@ -65,6 +62,36 @@ const SignIn = ({ setState, isOpen, setLS }) => {
 		]);
 	};
 
+	const handleSubmit = e => {
+		e.preventDefault();
+		fetch('http://localhost:3001/auth', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				username,
+				password,
+			}),
+		})
+			.then(res => {
+				console.log(res);
+				if (res.status === 200 || res.status === 201) {
+					return res.json();
+				} else {
+					addNotification(
+						'error',
+						'Der opstod en fejl',
+						'Der opstod en fejl da vi skulle logge dig ind. Tjek dit brugernavn og adgangskode og prøv igen.'
+					);
+					throw new Error('Der opstod en fejl');
+				}
+			})
+			.then(data => {
+				setToken(data.token);
+			});
+	};
+
 	return (
 		<motion.div
 			variants={containerVariants}
@@ -84,12 +111,18 @@ const SignIn = ({ setState, isOpen, setLS }) => {
 					Venligst log ind, før du kan få adgang til Lærevenlige Slåmidler
 				</p>
 				<form className="flex flex-col mt-4 gap-2" onSubmit={handleSubmit}>
-					<Input label="Brugernavn" value={username} setValue={setUsername} />
+					<Input
+						label="Brugernavn"
+						value={username}
+						setValue={setUsername}
+						id="username"
+					/>
 					<Input
 						label="Adgangskode"
 						value={password}
 						setValue={setPassword}
 						type="password"
+						id="password"
 					/>
 					<div className="flex justify-between items-center mt-4">
 						<button
@@ -98,8 +131,8 @@ const SignIn = ({ setState, isOpen, setLS }) => {
 							onClick={() =>
 								addNotification(
 									'info',
-									'Info',
-									'Du har ikke adgang til denne funktion'
+									'Glemt adgangskode',
+									'Har du prøvet "Jens" og "1234"?'
 								)
 							}
 						>

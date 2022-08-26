@@ -3,15 +3,17 @@ import { Outlet } from 'react-router-dom';
 import useLocalStorage from './hooks/useLocalStorage';
 import { useEffect, useState } from 'react';
 import SignIn from './templates/modals/SignIn';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import NotificationCenter from './templates/NotificationCenter';
+import TokenContext from './context/TokenContext';
+import { useContext } from 'react';
 
 const Layout = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [loggedIn, setLoggedIn] = useLocalStorage('isLoggedIn', false);
+	const { token, setToken } = useContext(TokenContext);
 
 	useEffect(() => {
-		loggedIn ? setIsLoggedIn(true) : setIsLoggedIn(false);
+		loggedIn ? setToken(true) : setToken(false);
 	}, [loggedIn]);
 
 	return (
@@ -19,25 +21,9 @@ const Layout = () => {
 			<NotificationCenter />
 			<Nav />
 			<div className="container">
-				efoeofwjf fewfoewfjekfew efewfewofewjff ewfewfoewfojefwe foefeofew
-				fewfewf ewfewfewgreg egt webkit-hyphenate-character: h5g3 3 tab-size: t4
-				<button
-					className="block px-6 py-2 bg-slate-400 rounded-md text-slate-50 border border-slate-300"
-					onClick={() => setLoggedIn(false)}
-				>
-					Reset LS
-				</button>
-				<Outlet />
+				{token && <Outlet />}
+				<AnimatePresence>{!token && <SignIn />}</AnimatePresence>
 			</div>
-			<AnimatePresence>
-				{isLoggedIn ? null : (
-					<SignIn
-						setState={setIsLoggedIn}
-						isOpen={isLoggedIn}
-						setLS={setLoggedIn}
-					/>
-				)}
-			</AnimatePresence>
 		</div>
 	);
 };
