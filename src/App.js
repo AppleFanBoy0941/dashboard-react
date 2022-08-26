@@ -1,16 +1,27 @@
-import useLocalStorage from "./hooks/useLocalStorage";
-import Bestillinger from "./pages/Bestillinger";
-import Nav from "./templates/Nav";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NotificationContext from "./context/NotificationContext";
+import { useState } from "react";
+
+import Layout from "./Layout";
+import Home from "./pages/Home";
+import TokenContext from "./context/TokenContext";
 
 function App() {
-  const [count, setCount] = useLocalStorage("count", 0);
+  const [notifications, setNotifications] = useState([]);
+  const [token, setToken] = useState(null);
+
   return (
-    <div className="App">
-      <Nav />
-      <Bestillinger />
-      <h1>{count}</h1>
-      <button onClick={() => setCount(count + 1)}>+</button>
-    </div>
+    <NotificationContext.Provider value={{ notifications, setNotifications }}>
+      <TokenContext.Provider value={{ token, setToken }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </TokenContext.Provider>
+    </NotificationContext.Provider>
   );
 }
 
