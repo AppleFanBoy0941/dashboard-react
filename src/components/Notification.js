@@ -1,7 +1,7 @@
 import FeatherIcon from 'feather-icons-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Button from './Button';
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import NotificationContext from '../context/NotificationContext';
 
 const Notification = ({
@@ -14,11 +14,12 @@ const Notification = ({
 	id,
 }) => {
 	const { notifications, setNotifications } = useContext(NotificationContext);
+
 	useEffect(() => {
 		setTimeout(() => {
 			setNotifications(notifications.filter(n => n.id !== id));
 		}, 5000);
-	}, []);
+	}, [notifications, id, setNotifications]);
 
 	return (
 		<motion.article

@@ -4,8 +4,7 @@ import { motion } from 'framer-motion';
 import Notification from '../components/Notification';
 
 const NotificationCenter = () => {
-	const { notifications, setNotifications } = useContext(NotificationContext);
-	console.log(notifications);
+	const { notifications } = useContext(NotificationContext);
 	return (
 		<motion.ul
 			values={notifications}

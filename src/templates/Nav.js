@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import BurgerMenu from '../components/BurgerMenu';
 import NavLinkItem from '../components/subcomponents/NavLinkItem';
 import QuickActions from './subTemplates/QuickActions';
+
 const Nav = () => {
 	const [isOpen, setIsOpen] = useState(window.innerWidth >= 768);
 	useEffect(() => {
