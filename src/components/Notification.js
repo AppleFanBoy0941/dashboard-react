@@ -13,7 +13,6 @@ const Notification = ({
 	callbackLabel,
 	id,
 }) => {
-	console.log(id);
 	const { notifications, setNotifications } = useContext(NotificationContext);
 	useEffect(() => {
 		setTimeout(() => {
@@ -23,9 +22,9 @@ const Notification = ({
 
 	return (
 		<motion.article
-			// initial={{ y: 120, opacity: 0 }}
-			// animate={{ y: 0, opacity: 1 }}
-			// exit={{ y: -120, opacity: 0 }}
+			initial={{ y: 120, opacity: 0 }}
+			animate={{ y: 0, opacity: 1 }}
+			exit={{ y: -120, opacity: 0 }}
 			id={id}
 			className="border border-slate-200 rounded-lg bg-slate-100"
 		>
