@@ -1,8 +1,9 @@
 import FeatherIcon from 'feather-icons-react';
-import { motion } from 'framer-motion';
+import { motion, Reorder } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import ActionContext from '../context/ActionContext';
+import useFetch from '../hooks/useFetch';
 
 const Search = () => {
 	const [openFilter, setOpenFilter] = useState(false);
@@ -20,6 +21,12 @@ const Search = () => {
 			window.removeEventListener('keydown', keyDownHandler);
 		};
 	}, [setOpenSearch]);
+
+	const { data, isLoading, error } = useFetch(
+		'http://localhost:3001/products/'
+	);
+	console.log(error);
+
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
@@ -27,7 +34,7 @@ const Search = () => {
 			exit={{ opacity: 0 }}
 			className="searchBG fixed w-screen h-screen top-0 left-0 bg-slate-50/25 backdrop-blur z-50 flex flex-col items-center"
 			onClick={e =>
-				e.target.className.includes('searchBG') && setOpenSearch(false)
+				!e.target.className.search('searchBG') && setOpenSearch(false)
 			}
 		>
 			<motion.div

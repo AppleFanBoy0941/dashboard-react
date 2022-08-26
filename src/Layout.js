@@ -1,6 +1,5 @@
 import Nav from './templates/Nav';
 import { Outlet } from 'react-router-dom';
-import { useState } from 'react';
 import SignIn from './templates/modals/SignIn';
 import { AnimatePresence } from 'framer-motion';
 import NotificationCenter from './templates/NotificationCenter';
@@ -11,16 +10,14 @@ import ActionContext from './context/ActionContext';
 import useKeyPress from './hooks/useKeyPress';
 
 const Layout = () => {
-	// const [loggedIn, setLoggedIn] = useLocalStorage('isLoggedIn', false);
 	const { token } = useContext(TokenContext);
 	const { quickActions } = useContext(ActionContext);
 	const { openSearch, setOpenSearch } = quickActions.search;
 
-	useKeyPress(['shiftKey', 'ctrlKey', 'f'], () => setOpenSearch(!openSearch));
-
-	// useEffect(() => {
-	// 	loggedIn ? setToken(true) : setToken(false);
-	// }, [loggedIn]);
+	useKeyPress('f', ['shiftKey', 'ctrlKey'], () => setOpenSearch(!openSearch));
+	useKeyPress('f', ['shiftKey', 'metaKey'], () => setOpenSearch(!openSearch));
+	useKeyPress(' ', ['shiftKey'], () => setOpenSearch(!openSearch));
+	useKeyPress('4', ['metaKey'], () => setOpenSearch(!openSearch));
 
 	return (
 		<>
