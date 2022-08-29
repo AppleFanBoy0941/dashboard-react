@@ -12,7 +12,7 @@ const Bestillinger = () => {
             <Charts />
           </div>
         </div>
-        <div></div>
+        <div className="bg-slate-100"></div>
       </div>
       <div></div>
     </section>
