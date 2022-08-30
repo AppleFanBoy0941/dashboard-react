@@ -21,11 +21,11 @@ const Layout = () => {
 
 	return (
 		<>
-			<div className="flex flex-col w-screen h-screen lg:flex-row">
+			<div className="flex flex-col w-screen h-screen md:flex-row">
 				<AnimatePresence>{openSearch && <Search />}</AnimatePresence>
 				<NotificationCenter />
 				<Nav />
-				<div className="container">
+				<div className="pt-24 w-full md:pt-0 md:h-screen">
 					{token && <Outlet />}
 					<AnimatePresence>{!token && <SignIn />}</AnimatePresence>
 				</div>

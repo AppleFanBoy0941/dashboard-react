@@ -72,7 +72,6 @@ const SignIn = () => {
 			}),
 		})
 			.then(res => {
-				console.log(res);
 				if (res.status === 200 || res.status === 201) {
 					return res.json();
 				} else {

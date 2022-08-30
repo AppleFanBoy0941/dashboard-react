@@ -30,7 +30,7 @@ const Search = () => {
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
-			className="searchBG fixed w-screen h-screen top-0 left-0 bg-slate-50/25 backdrop-blur z-50 flex flex-col items-center"
+			className="searchBG fixed w-screen h-screen top-0 left-0 bg-slate-50/50 backdrop-blur-lg z-50 flex flex-col items-center"
 			onClick={e =>
 				!e.target.className.search('searchBG') && setOpenSearch(false)
 			}

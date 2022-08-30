@@ -13,7 +13,7 @@ const Nav = () => {
 	}, []);
 
 	return (
-		<nav className="fixed flex flex-col justify-between items-center px-4 py-4 md:px-6 md:py-12 w-screen bg-slate-50 md:left-0 md:max-w-sm">
+		<nav className="fixed md:static flex flex-col justify-between items-center px-4 py-4 md:px-6 md:py-12 w-screen bg-slate-50 md:left-0 md:max-w-sm">
 			<div className="flex justify-between items-center w-full bg-slate-50">
 				<QuickActions screen="mobile" />
 				<BurgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
