@@ -35,15 +35,15 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
 		>
 			<div className="w-6 h-6 flex flex-col justify-center items-center gap-1">
 				<motion.span
-					className="bg-slate-800 block rounded-full"
+					className="bg-slate-600 block rounded-full"
 					variants={spanVariant}
 				></motion.span>
 				<motion.span
-					className="bg-slate-800 block rounded-full"
+					className="bg-slate-600 block rounded-full"
 					variants={spanVariant}
 				></motion.span>
 				<motion.span
-					className="bg-slate-800 block rounded-full"
+					className="bg-slate-600 block rounded-full"
 					variants={spanVariant}
 				></motion.span>
 			</div>

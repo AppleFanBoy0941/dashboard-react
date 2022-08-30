@@ -1,14 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import TokenContext from '../context/TokenContext';
 
-const useFetch = ({ url }) => {
-	const [data, setData] = useState({});
+const useFetch = url => {
+	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const { token } = useContext(TokenContext);
 
 	useEffect(() => {
-		async () => {
+		(async function () {
 			try {
-				const response = await fetch('url');
+				const response = await fetch(url, {
+					method: 'GET',
+					headers: {
+						authorization: 'Bearer ' + token,
+					},
+				});
 				const data = await response.json();
 				setData(data);
 				setIsLoading(false);
@@ -16,7 +23,7 @@ const useFetch = ({ url }) => {
 				setError(error);
 				setIsLoading(false);
 			}
-		};
+		})();
 	}, [url]);
 
 	return { data, isLoading, error };

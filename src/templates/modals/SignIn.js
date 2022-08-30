@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Input from '../../components/subcomponents/Input';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Button from '../../components/Button';
 import FeatherIcon from 'feather-icons-react';
 import NotificationContext from '../../context/NotificationContext';
@@ -47,19 +47,16 @@ const SignIn = () => {
 	const [password, setPassword] = useState('');
 
 	const addNotification = (type, title, body) => {
-		console.log('notification');
-		setNotifications([
-			...notifications,
-			{
-				type,
-				title,
-				body,
-				id:
-					notifications.length > 0
-						? Math.max(...notifications.map(n => n.id)) + 1
-						: 0,
-			},
-		]);
+		const newNotification = {
+			type,
+			title,
+			body,
+			id: notifications.length > 0 ? notifications.length + 1 : 0,
+		};
+		setNotifications([...notifications, newNotification]);
+		setTimeout(() => {
+			setNotifications(notifications.filter(n => n.id !== newNotification.id));
+		}, 5000);
 	};
 
 	const handleSubmit = e => {
