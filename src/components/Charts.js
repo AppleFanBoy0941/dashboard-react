@@ -1,41 +1,17 @@
-import { Doughnut } from "react-chartjs-2";
+// import { Doughnut } from "react-chartjs-2";
+import useFetch from "../hooks/useFetch";
 
 const Charts = () => {
-  const chartData = [
-    {
-      label: "Venezuela",
-      value: "290",
-    },
-    {
-      label: "Saudi",
-      value: "260",
-    },
-    {
-      label: "Canada",
-      value: "180",
-    },
-    {
-      label: "Iran",
-      value: "140",
-    },
-    {
-      label: "Russia",
-      value: "115",
-    },
-    {
-      label: "UAE",
-      value: "100",
-    },
-    {
-      label: "US",
-      value: "30",
-    },
-    {
-      label: "China",
-      value: "30",
-    },
-  ];
-  return <Doughnut data={chartData} />;
+  const { data } = useFetch("http://localhost:3001/orders");
+  // let viewsForDay =
+  //   data[0].total + data[1].total + data[2].total + data[3].total;
+  // console.log(viewsForDay);
+
+  return (
+    <div>
+      <div></div>
+    </div>
+  );
 };
 
 export default Charts;
