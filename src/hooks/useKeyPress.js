@@ -20,8 +20,6 @@ const useKeyPress = (key, cKeys, callback, node) => {
 
 			const allKeysPressed = ctrlKey && shiftKey && metaKey && altKey;
 
-			console.log(event.key.toLowerCase(), key, allKeysPressed);
-
 			if (key === event.key.toLowerCase() && allKeysPressed) {
 				callbackRef.current(event);
 			}

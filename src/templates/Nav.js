@@ -32,8 +32,8 @@ const Nav = () => {
 							animate={{
 								opacity: 1,
 								height: 'calc(100vh - 6rem)',
-								paddingBottom: 20,
-								paddingTop: 10,
+								paddingBottom: 24,
+								paddingTop: 24,
 							}}
 							exit={{
 								opacity: 0,
