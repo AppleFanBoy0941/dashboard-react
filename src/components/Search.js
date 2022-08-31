@@ -1,10 +1,8 @@
 import FeatherIcon from 'feather-icons-react';
-import { AnimatePresence, motion, Reorder } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import ActionContext from '../context/ActionContext';
-import useFetch from '../hooks/useFetch';
-import TokenContext from '../context/TokenContext';
 import SearchCat from './SearchCat';
 
 const Search = () => {
@@ -12,7 +10,6 @@ const Search = () => {
 	const { quickActions } = useContext(ActionContext);
 	const { setOpenSearch } = quickActions.search;
 	const [value, setValue] = useState('');
-	const { token } = useContext(TokenContext);
 	useEffect(() => {
 		const keyDownHandler = e => {
 			if (e.keyCode === 27) {

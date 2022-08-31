@@ -14,6 +14,7 @@ const SearchCat = ({ cat, search }) => {
 				{cat}
 			</p>
 			{isLoading && <LoadingSpinner />}
+			{error && <p>{error}</p>}
 			<AnimatePresence>
 				{data.length > 0 ? (
 					data.map((item, index) => (

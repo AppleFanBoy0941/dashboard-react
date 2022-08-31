@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Input from '../../components/subcomponents/Input';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import Button from '../../components/Button';
 import FeatherIcon from 'feather-icons-react';
 import NotificationContext from '../../context/NotificationContext';
