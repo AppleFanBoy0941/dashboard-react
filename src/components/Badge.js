@@ -3,9 +3,6 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
 const Badge = ({ badge, index, size }) => {
-	console.log(badge);
-
-	console.log(badge.bg || 'bg-red-400');
 	return (
 		<>
 			{badge && (

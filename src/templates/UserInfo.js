@@ -2,14 +2,13 @@ import useFetch from '../hooks/useFetch';
 import { AnimatePresence, motion } from 'framer-motion';
 import Badge from '../components/Badge';
 import InfoArticle from '../components/InfoArticle';
+import List from '../components/List';
+import ListOrder from '../components/ListOrder';
 
 const UserInfo = ({ id }) => {
 	const url = `http://localhost:3001/`;
-	console.log(id);
 	const { data } = useFetch(`${url}users?id=${id}`);
-	console.log(data);
 	const item = data[0];
-	console.log(item);
 	return (
 		<>
 			<div className="flex items-end justify-between">
@@ -90,17 +89,37 @@ const UserInfo = ({ id }) => {
 				</motion.p>
 			</div>
 			{item && (
-				<div className="grid grid-cols-2 gap-4 mt-4">
-					<InfoArticle
-						title="Kundeoplysninger"
-						content={[item.name, item.email, `+45${item.phone}`]}
-					/>
-					<article>
-						<h2 className="text-lg font-bold text-slate-600 pb-2 border-b">
-							Leveringsoplysninger
-						</h2>
-					</article>
-				</div>
+				<motion.section
+					initial={{ opacity: 0, y: 80 }}
+					animate={{
+						opacity: 1,
+						y: 0,
+						transition: { duration: 0.5, delay: 0.75 },
+					}}
+				>
+					<div className="grid grid-cols-2 gap-4 my-4">
+						<InfoArticle
+							title="Kundeoplysninger"
+							content={[item.name, item.email, `+45${item.phone}`]}
+						/>
+						<InfoArticle
+							title="Leveringsoplysninger"
+							content={[
+								item.address.street,
+								item.address.city,
+								item.address.zip,
+							]}
+						/>
+					</div>
+					<List>
+						{item.orders_id.map(id => (
+							<ListOrder key={id} id={id} />
+						))}
+						{item.orders_id.length === 0 && (
+							<p className="m-4 font-semibold text-slate-400">Ingen ordrer</p>
+						)}
+					</List>
+				</motion.section>
 			)}
 		</>
 	);
