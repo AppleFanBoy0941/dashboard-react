@@ -14,13 +14,23 @@ const Bestillinger = () => {
   const [toDate, setToDate] = useState(date);
   // console.log(`date: ${date} past:${past}`);
 
-  const [collapsed, setCollapsed] = useState(true);
+  // const [collapsed, setCollapsed] = useState(true);
   const [customerId, setCustomerId] = useState("");
+  const [compareUser, setCompareUser] = useState("");
 
-  const { data: users } = useFetch("http://localhost:3001/users");
+  const { data: users } = useFetch(
+    "http://localhost:3001/users$" + { customerId }
+  );
   const { data } = useFetch("http://localhost:3001/orders");
-  console.log(data);
-  console.log(users);
+  // console.log(data);
+  // console.log(users[0].id);
+  function goerNoget() {
+    setCompareUser(
+      users.map(function (user) {
+        return user.id === customerId;
+      })
+    );
+  }
 
   return (
     <section className="flex flex-col lg:flex-row pt-24">
@@ -68,7 +78,10 @@ const Bestillinger = () => {
                     return (
                       <div
                         key={order.id}
-                        onClick={() => setCustomerId(order.id)}
+                        onClick={() => {
+                          setCustomerId(order.customer_id);
+                          goerNoget();
+                        }}
                         className="flex justify-between py-2"
                       >
                         <div>
@@ -96,11 +109,20 @@ const Bestillinger = () => {
         </div>
       </div>
       <AnimatePresence>
-        {collapsed && (
-          <motion.div className="bg-slate-800 w-screen fixed bottom-0 h-32 rounded-t-md">
-            <h2 className="text-white">Ordre {customerId}</h2>
-          </motion.div>
-        )}
+        <motion.div className="bg-slate-800 w-screen fixed bottom-0 h-32 rounded-t-md">
+          <h2 className="text-white">{users}</h2>
+          {/* {users.map(function (user) {
+            return user.id === customerId ? (
+              <div key={user.id}>
+                <h2 className="text-white">ordre {user.id}</h2>
+              </div>
+            ) : (
+              <div className="text-white">
+                <h1>fejl</h1>
+              </div>
+            );
+          })} */}
+        </motion.div>
       </AnimatePresence>
     </section>
   );
