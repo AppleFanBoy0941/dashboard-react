@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
+import Badge from './Badge';
 
 const ListItemU = ({ item }) => {
 	const variants = {
@@ -52,11 +53,11 @@ const ListItemU = ({ item }) => {
 				</Link>
 				<p className="text-sm text-slate-400">#{item.id}</p>
 			</div>
-			<div className="flex ml-auto">
-				<div className="h-6 w-6 bg-amber-400 rounded-full -ml-2"></div>
-				<div className="h-6 w-6 bg-amber-400 rounded-full -ml-2"></div>
-				<div className="h-6 w-6 bg-amber-400 rounded-full -ml-2"></div>
-			</div>
+			<ul key="badges" className="flex flex-row-reverse ml-auto mr-2">
+				{item.badges.map((badge, index) => (
+					<Badge key={index} badge={badge} index={index} size="small" />
+				))}
+			</ul>
 		</li>
 	);
 };

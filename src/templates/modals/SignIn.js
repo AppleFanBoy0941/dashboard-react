@@ -5,9 +5,10 @@ import Button from '../../components/Button';
 import FeatherIcon from 'feather-icons-react';
 import NotificationContext from '../../context/NotificationContext';
 import TokenContext from '../../context/TokenContext';
+import useNotification from '../../hooks/useNotification';
 
 const SignIn = () => {
-	const { notifications, setNotifications } = useContext(NotificationContext);
+	const { notifications } = useContext(NotificationContext);
 	const { setToken } = useContext(TokenContext);
 
 	const containerVariants = {
@@ -46,18 +47,28 @@ const SignIn = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
-	const addNotification = (type, title, body) => {
+	const updateNotifications = useNotification();
+
+	const addNotification = notification => {
 		const newNotification = {
-			type,
-			title,
-			body,
+			...notification,
 			id: notifications.length > 0 ? notifications.length + 1 : 0,
 		};
-		setNotifications([...notifications, newNotification]);
-		setTimeout(() => {
-			setNotifications(notifications.filter(n => n.id !== newNotification.id));
-		}, 5000);
+		updateNotifications(newNotification);
 	};
+
+	// const addNotification = (type, title, body) => {
+	// 	const newNotification = {
+	// 		type,
+	// 		title,
+	// 		body,
+	// 		id: notifications.length > 0 ? notifications.length + 1 : 0,
+	// 	};
+	// 	setNotifications([...notifications, newNotification]);
+	// 	setTimeout(() => {
+	// 		setNotifications(notifications.filter(n => n.id !== newNotification.id));
+	// 	}, 5000);
+	// };
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -75,11 +86,11 @@ const SignIn = () => {
 				if (res.status === 200 || res.status === 201) {
 					return res.json();
 				} else {
-					addNotification(
-						'error',
-						'Der opstod en fejl',
-						'Der opstod en fejl da vi skulle logge dig ind. Tjek dit brugernavn og adgangskode og prøv igen.'
-					);
+					addNotification({
+						type: 'error',
+						title: 'Der opstod en fejl',
+						body: 'Der opstod en fejl da vi skulle logge dig ind. Tjek dit brugernavn og adgangskode og prøv igen.',
+					});
 					throw new Error('Der opstod en fejl');
 				}
 			})
@@ -125,11 +136,11 @@ const SignIn = () => {
 							type="button"
 							className="flex items-center text-sm gap-2 p-2 transition text-slate-400 hover:bg-slate-400/10 rounded-lg"
 							onClick={() =>
-								addNotification(
-									'info',
-									'Glemt adgangskode',
-									'Har du prøvet "Jens" og "1234"?'
-								)
+								addNotification({
+									type: 'info',
+									title: 'Glemt adgangskode',
+									body: 'Har du prøvet "Jens" og "1234"?',
+								})
 							}
 						>
 							<FeatherIcon icon="help-circle" />

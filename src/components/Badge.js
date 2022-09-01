@@ -2,7 +2,7 @@ import FeatherIcon from 'feather-icons-react';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
-const Badge = ({ badge, index }) => {
+const Badge = ({ badge, index, size }) => {
 	console.log(badge);
 
 	console.log(badge.bg || 'bg-red-400');
@@ -33,12 +33,17 @@ const Badge = ({ badge, index }) => {
 							'bg-fuchsia-300 border-fuchsia-200 text-black':
 								badge.color === 'fuchsia',
 							'bg-sky-300 border-sky-200 text-black': badge.color === 'sky',
+							'h-6 w-6 p-1 border': size === 'small',
 						}
 					)}
 				>
 					{badge.icon && <FeatherIcon strokeWidth="3" icon={badge.icon} />}
 					{badge.text && (
-						<span className="text-base font-extrabold text-black">
+						<span
+							className={`${
+								size === 'small' ? 'text-xs' : 'text-base'
+							} font-extrabold text-black`}
+						>
 							{badge.text}
 						</span>
 					)}

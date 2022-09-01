@@ -1,6 +1,7 @@
 import useFetch from '../hooks/useFetch';
 import { AnimatePresence, motion } from 'framer-motion';
 import Badge from '../components/Badge';
+import InfoArticle from '../components/InfoArticle';
 
 const UserInfo = ({ id }) => {
 	const url = `http://localhost:3001/`;
@@ -50,7 +51,7 @@ const UserInfo = ({ id }) => {
 				</AnimatePresence>
 			</div>
 			<div className="flex flex-col">
-				<div className="flex justify-between items-end">
+				<div className="flex justify-between items-end gap-2">
 					<motion.h1
 						initial={{ opacity: 0, lineHeight: '0px', y: 40 }}
 						animate={{
@@ -88,26 +89,19 @@ const UserInfo = ({ id }) => {
 					{item && item.email}
 				</motion.p>
 			</div>
-			<div className="grid grid-cols-2 gap-4 mt-4">
-				<article>
-					<h2 className="text-lg font-bold text-slate-600 pb-2 border-b">
-						Kundeoplysninger
-					</h2>
-					<ul className="mt-2">
-						<li className="flex items-center justify-between text-slate-400 font-semibold">
-							{item && item.name}
-						</li>
-						<li className="flex items-center justify-between text-sm text-slate-400">
-							{item && item.email}
-						</li>
-					</ul>
-				</article>
-				<article>
-					<h2 className="text-lg font-bold text-slate-600 pb-2 border-b">
-						Leveringsoplysninger
-					</h2>
-				</article>
-			</div>
+			{item && (
+				<div className="grid grid-cols-2 gap-4 mt-4">
+					<InfoArticle
+						title="Kundeoplysninger"
+						content={[item.name, item.email, `+45${item.phone}`]}
+					/>
+					<article>
+						<h2 className="text-lg font-bold text-slate-600 pb-2 border-b">
+							Leveringsoplysninger
+						</h2>
+					</article>
+				</div>
+			)}
 		</>
 	);
 };
