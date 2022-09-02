@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import BurgerMenu from '../components/BurgerMenu';
 import NavLinkItem from '../components/subcomponents/NavLinkItem';
 import QuickActions from './subTemplates/QuickActions';
+import logo from '../assets/images/X-ray.png';
 
 const Nav = () => {
 	const [isOpen, setIsOpen] = useState(window.innerWidth >= 768);
@@ -13,7 +14,7 @@ const Nav = () => {
 	}, []);
 
 	return (
-		<nav className="fixed flex flex-col justify-between items-center px-4 py-4 md:px-6 md:py-12 w-screen bg-slate-50 md:left-0 md:max-w-sm">
+		<nav className="fixed md:static flex flex-col justify-between items-center px-4 py-4 md:px-6 md:py-12 w-screen bg-slate-50 md:left-0 md:max-w-sm">
 			<div className="flex justify-between items-center w-full bg-slate-50">
 				<QuickActions screen="mobile" />
 				<BurgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -45,7 +46,7 @@ const Nav = () => {
 						>
 							<section className="flex items-center w-full gap-4">
 								<div className="flex justify-center items-center w-16 h-16 rounded-full bg-slate-400">
-									<img src="./X-ray.png" alt="site icon" />
+									<img src={logo} alt="site icon" />
 								</div>
 								<div>
 									<h3 className="font-semibold text-slate-800">

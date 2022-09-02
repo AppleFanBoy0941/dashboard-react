@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
-const Input = ({ label, value, setValue, error, type, id }) => {
-	const [isFocused, setIsFocused] = useState(false);
+const Input = ({ label, value, setValue, error, type, id, max }) => {
+	const [isFocused, setIsFocused] = useState(value ? true : false);
 
 	const labelVariants = {
 		initial: {
@@ -47,6 +47,7 @@ const Input = ({ label, value, setValue, error, type, id }) => {
 				onBlur={() => !value && setIsFocused(false)}
 				id={id}
 				name={id}
+				maxLength={max || null}
 			/>
 		</label>
 	);

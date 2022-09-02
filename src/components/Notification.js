@@ -1,8 +1,8 @@
 import FeatherIcon from 'feather-icons-react';
 import { motion } from 'framer-motion';
 import Button from './Button';
-import { useEffect, useContext } from 'react';
-import NotificationContext from '../context/NotificationContext';
+// import { useEffect, useContext } from 'react';
+// import NotificationContext from '../context/NotificationContext';
 
 const Notification = ({
 	body,
@@ -13,7 +13,7 @@ const Notification = ({
 	callbackLabel,
 	id,
 }) => {
-	const { notifications, setNotifications } = useContext(NotificationContext);
+	// const { notifications, setNotifications } = useContext(NotificationContext);
 
 	// setTimeout(() => {
 	// 	setNotifications(notifications.filter(n => n.id !== id));

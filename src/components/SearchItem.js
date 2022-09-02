@@ -1,6 +1,14 @@
 import { motion } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import ActionContext from '../context/ActionContext';
 
 const SearchItem = ({ item, cat, index }) => {
+	const { quickActions } = useContext(ActionContext);
+	const { setOpenSearch } = quickActions.search;
+	const navigate = useNavigate();
+	const tab =
+		cat === 'users' ? 'kunder' : cat === 'products' ? 'produkter' : 'ordre';
 	return (
 		<motion.li
 			initial={{ opacity: 0, y: -20 }}
@@ -25,14 +33,19 @@ const SearchItem = ({ item, cat, index }) => {
 			layout
 			className="p-4 border-b border-b-slate-200 cursor-pointer"
 		>
-			<div>
-				<a href={`/${cat}?${item.id}`} className="font-bold text-slate-600">
+			<div
+				onClick={() => {
+					navigate(`/${tab}/${item.id}`);
+					setOpenSearch(false);
+				}}
+			>
+				<Link to={`/${tab}/${item.id}`} className="font-bold text-slate-600">
 					{cat === 'products'
 						? item.name
 						: cat === 'orders'
 						? item.id
 						: item.name}
-				</a>
+				</Link>
 				<p className="text-slate-400 text-sm">
 					{cat === 'products'
 						? item.brand

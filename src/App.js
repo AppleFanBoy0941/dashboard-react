@@ -6,6 +6,7 @@ import Layout from './Layout';
 import Home from './pages/Home';
 import TokenContext from './context/TokenContext';
 import ActionContext from './context/ActionContext';
+import Kunder from './pages/Kunder';
 
 function App() {
 	const [notifications, setNotifications] = useState([]);
@@ -43,6 +44,8 @@ function App() {
 						<Routes>
 							<Route path="/" element={<Layout />}>
 								<Route index element={<Home />} />
+								<Route path="/kunder" element={<Kunder />} />
+								<Route path="/kunder/:id" element={<Kunder />} />
 							</Route>
 						</Routes>
 					</BrowserRouter>

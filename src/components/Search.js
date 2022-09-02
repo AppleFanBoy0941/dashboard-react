@@ -1,10 +1,8 @@
 import FeatherIcon from 'feather-icons-react';
-import { AnimatePresence, motion, Reorder } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import ActionContext from '../context/ActionContext';
-import useFetch from '../hooks/useFetch';
-import TokenContext from '../context/TokenContext';
 import SearchCat from './SearchCat';
 
 const Search = () => {
@@ -12,7 +10,6 @@ const Search = () => {
 	const { quickActions } = useContext(ActionContext);
 	const { setOpenSearch } = quickActions.search;
 	const [value, setValue] = useState('');
-	const { token } = useContext(TokenContext);
 	useEffect(() => {
 		const keyDownHandler = e => {
 			if (e.keyCode === 27) {
@@ -30,7 +27,7 @@ const Search = () => {
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
-			className="searchBG fixed w-screen h-screen top-0 left-0 bg-slate-50/25 backdrop-blur z-50 flex flex-col items-center"
+			className="searchBG fixed w-screen h-screen top-0 left-0 bg-slate-50/50 backdrop-blur-lg z-50 flex flex-col items-center"
 			onClick={e =>
 				!e.target.className.search('searchBG') && setOpenSearch(false)
 			}
