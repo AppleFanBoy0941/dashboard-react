@@ -3,18 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import Badge from './Badge';
 
 const ListItemU = ({ item }) => {
-	const variants = {
-		initial: {
-			opacity: 0,
-		},
-		animate: {
-			opacity: 1,
-		},
-	};
 	const navigate = useNavigate();
 	return (
 		<li
-			variants={variants}
 			className="flex items-center gap-2	p-4 border-b border-b-slate-200 hover:bg-slate-200/25 transition"
 			onClick={() => navigate(`/kunder/${item.id}`)}
 		>
