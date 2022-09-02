@@ -1,30 +1,36 @@
 import Nav from './templates/Nav';
 import { Outlet } from 'react-router-dom';
-import useLocalStorage from './hooks/useLocalStorage';
-import { useEffect, useState } from 'react';
 import SignIn from './templates/modals/SignIn';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import NotificationCenter from './templates/NotificationCenter';
 import TokenContext from './context/TokenContext';
 import { useContext } from 'react';
+import Search from './components/Search';
+import ActionContext from './context/ActionContext';
+import useKeyPress from './hooks/useKeyPress';
 
 const Layout = () => {
-	const [loggedIn, setLoggedIn] = useLocalStorage('isLoggedIn', false);
-	const { token, setToken } = useContext(TokenContext);
+	const { token } = useContext(TokenContext);
+	const { quickActions } = useContext(ActionContext);
+	const { openSearch, setOpenSearch } = quickActions.search;
 
-	useEffect(() => {
-		loggedIn ? setToken(true) : setToken(false);
-	}, [loggedIn]);
+	useKeyPress('f', ['shiftKey', 'ctrlKey'], () => setOpenSearch(!openSearch));
+	useKeyPress('f', ['shiftKey', 'metaKey'], () => setOpenSearch(!openSearch));
+	useKeyPress(' ', ['shiftKey'], () => setOpenSearch(!openSearch));
+	useKeyPress('4', ['metaKey'], () => setOpenSearch(!openSearch));
 
 	return (
-		<div className="flex flex-col lg:flex-row">
-			<NotificationCenter />
-			<Nav />
-			<div className="container">
-				{token && <Outlet />}
-				<AnimatePresence>{!token && <SignIn />}</AnimatePresence>
+		<>
+			<div className="flex flex-col w-screen h-screen md:flex-row">
+				<AnimatePresence>{openSearch && <Search />}</AnimatePresence>
+				<NotificationCenter />
+				<Nav />
+				<div className="pt-24 w-full md:pt-0 md:h-screen">
+					{token && <Outlet />}
+					<AnimatePresence>{!token && <SignIn />}</AnimatePresence>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

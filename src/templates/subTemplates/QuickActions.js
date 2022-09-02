@@ -1,6 +1,11 @@
 import QuickAction from '../../components/QuickAction';
+import { useContext } from 'react';
+import ActionContext from '../../context/ActionContext';
 
 const QuickActions = ({ screen }) => {
+	const { quickActions } = useContext(ActionContext);
+	const { setOpenSearch } = quickActions.search;
+
 	return (
 		<ul
 			className={`flex gap-4 md:justify-between md:w-full ${
@@ -17,7 +22,7 @@ const QuickActions = ({ screen }) => {
 				<QuickAction icon="edit" />
 			</li>
 			<li>
-				<QuickAction icon="search" />
+				<QuickAction icon="search" callback={() => setOpenSearch(true)} />
 			</li>
 		</ul>
 	);

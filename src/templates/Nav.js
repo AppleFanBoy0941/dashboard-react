@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import BurgerMenu from "../components/BurgerMenu";
 import NavLinkItem from "../components/subcomponents/NavLinkItem";
 import QuickActions from "./subTemplates/QuickActions";
+import logo from "../assets/images/X-ray.png";
+
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(window.innerWidth >= 768);
   useEffect(() => {
@@ -31,8 +33,8 @@ const Nav = () => {
               animate={{
                 opacity: 1,
                 height: "calc(100vh - 6rem)",
-                paddingBottom: 20,
-                paddingTop: 10,
+                paddingBottom: 24,
+                paddingTop: 24,
               }}
               exit={{
                 opacity: 0,
@@ -44,7 +46,7 @@ const Nav = () => {
             >
               <section className="flex items-center w-full gap-4">
                 <div className="flex justify-center items-center w-16 h-16 rounded-full bg-slate-400">
-                  <img src="./X-ray.png" alt="site icon" />
+                  <img src={logo} alt="site icon" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-800">
