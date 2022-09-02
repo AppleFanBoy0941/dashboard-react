@@ -5,6 +5,7 @@ import useFetch from "../hooks/useFetch";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import UserOrders from "../components/UserOrders";
 const Bestillinger = () => {
   const d = new Date();
   const date = d.toLocaleDateString();
@@ -12,25 +13,11 @@ const Bestillinger = () => {
   const past = new Date(pastDate).toLocaleDateString();
   const [fromDate, setFromDate] = useState(past);
   const [toDate, setToDate] = useState(date);
-  // console.log(`date: ${date} past:${past}`);
-
-  // const [collapsed, setCollapsed] = useState(true);
   const [customerId, setCustomerId] = useState("");
-  const [compareUser, setCompareUser] = useState("");
+  console.log(customerId);
 
-  const { data: users } = useFetch(
-    "http://localhost:3001/users$" + { customerId }
-  );
   const { data } = useFetch("http://localhost:3001/orders");
-  // console.log(data);
-  // console.log(users[0].id);
-  function goerNoget() {
-    setCompareUser(
-      users.map(function (user) {
-        return user.id === customerId;
-      })
-    );
-  }
+  const { data: users } = useFetch("http://localhost:3001/users");
 
   return (
     <section className="flex flex-col lg:flex-row pt-24">
@@ -80,7 +67,6 @@ const Bestillinger = () => {
                         key={order.id}
                         onClick={() => {
                           setCustomerId(order.customer_id);
-                          goerNoget();
                         }}
                         className="flex justify-between py-2"
                       >
@@ -110,18 +96,7 @@ const Bestillinger = () => {
       </div>
       <AnimatePresence>
         <motion.div className="bg-slate-800 w-screen fixed bottom-0 h-32 rounded-t-md">
-          <h2 className="text-white">{users}</h2>
-          {/* {users.map(function (user) {
-            return user.id === customerId ? (
-              <div key={user.id}>
-                <h2 className="text-white">ordre {user.id}</h2>
-              </div>
-            ) : (
-              <div className="text-white">
-                <h1>fejl</h1>
-              </div>
-            );
-          })} */}
+          {data && <UserOrders data={data} userObj={users} customerId />}
         </motion.div>
       </AnimatePresence>
     </section>
