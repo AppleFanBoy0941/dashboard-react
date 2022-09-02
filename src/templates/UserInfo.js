@@ -1,5 +1,5 @@
 import useFetch from "../hooks/useFetch";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Badge from "../components/Badge";
 import InfoArticle from "../components/InfoArticle";
 import List from "../components/List";
@@ -9,46 +9,43 @@ const UserInfo = ({ id }) => {
   const url = `http://localhost:3001/`;
   const { data } = useFetch(`${url}users?id=${id}`);
   const item = data[0];
-  console.log(data, item);
   return (
     <>
       <div className="flex items-end justify-between">
-        <AnimatePresence>
-          {item && (
-            <div key="img" className="relative w-32 h-32">
-              <motion.img
-                initial={{ scale: 0.5, opacity: 0, y: 0 }}
-                animate={{
-                  scale: 0.9,
-                  opacity: 0.5,
-                  y: 8,
-                  transition: { duration: 0.5, delay: 0.25 },
-                }}
-                className="absolute h-32 w-32 rounded-full blur-lg"
-                src={`${url}${item.image}`}
-                alt=""
-              />
-              <motion.img
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{
-                  scale: 1,
-                  opacity: 1,
-                  transition: { duration: 0.5, ease: "easeInOut" },
-                }}
-                className="absolute w-32 h-32 rounded-full"
-                src={`${url}${item.image}`}
-                alt={item.name}
-              />
-            </div>
-          )}
-          {item?.badges && (
-            <ul key="badges" className="flex flex-row-reverse">
-              {item.badges.map((badge, index) => (
-                <Badge key={index} badge={badge} index={index} />
-              ))}
-            </ul>
-          )}
-        </AnimatePresence>
+        {item && (
+          <div key="img" className="relative w-32 h-32">
+            <motion.img
+              initial={{ scale: 0.5, opacity: 0, y: 0 }}
+              animate={{
+                scale: 0.9,
+                opacity: 0.5,
+                y: 8,
+                transition: { duration: 0.5, delay: 0.25 },
+              }}
+              className="absolute h-32 w-32 rounded-full blur-lg"
+              src={`${url}${item.image}`}
+              alt=""
+            />
+            <motion.img
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{
+                scale: 1,
+                opacity: 1,
+                transition: { duration: 0.5, ease: "easeInOut" },
+              }}
+              className="absolute w-32 h-32 rounded-full"
+              src={`${url}${item.image}`}
+              alt={item.name}
+            />
+          </div>
+        )}
+        {item?.badges && (
+          <ul key="badges" className="flex flex-row-reverse">
+            {item.badges.map((badge, index) => (
+              <Badge key={index} badge={badge} index={index} />
+            ))}
+          </ul>
+        )}
       </div>
       <div className="flex flex-col">
         <div className="flex justify-between items-end gap-2">

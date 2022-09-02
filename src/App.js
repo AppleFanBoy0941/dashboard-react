@@ -8,6 +8,7 @@ import Bestillinger from "./pages/Bestillinger";
 import TokenContext from "./context/TokenContext";
 import ActionContext from "./context/ActionContext";
 import Kunder from "./pages/Kunder";
+import Varer from "./pages/Varer";
 
 function App() {
   const [notifications, setNotifications] = useState([]);
@@ -47,6 +48,8 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path="/bestillinger" element={<Bestillinger />} />
                 <Route path="/bestillinger/:id" element={<Bestillinger />} />
+                <Route path="/varer" element={<Varer />} />
+                <Route path="/varer/:id" element={<Varer />} />
                 <Route path="/kunder" element={<Kunder />} />
                 <Route path="/kunder/:id" element={<Kunder />} />
               </Route>

@@ -8,9 +8,7 @@ const InfoArticle = ({ title, content }) => {
 				{content.map((item, index) => (
 					<li
 						key={index}
-						className={`flex items-center justify-between text-slate-400 ${
-							index === 0 ? 'text-base font-bold' : 'text-sm font-semibold'
-						}`}
+						className={`flex items-center justify-between text-slate-400 text-sm font-semibold`}
 					>
 						{item}
 					</li>
