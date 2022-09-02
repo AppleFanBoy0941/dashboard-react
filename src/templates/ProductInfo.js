@@ -5,23 +5,6 @@ import { useState } from 'react';
 import Accordion from '../components/Accordion';
 
 const ProductInfo = ({ id }) => {
-	const [descOpen, setDescOpen] = useState(false);
-	// const descVariants = {
-	// 	open: {
-	// 		height: 'auto',
-	// 		transition: {
-	// 			duration: 0.3,
-	// 			ease: 'easeInOut',
-	// 		},
-	// 	},
-	// 	closed: {
-	// 		height: 48,
-	// 		transition: {
-	// 			duration: 0.5,
-	// 			ease: 'easeInOut',
-	// 		},
-	// 	},
-	// };
 	const url = `http://localhost:3001/`;
 	const { data } = useFetch(`${url}products?id=${id}`);
 	const item = data[0];

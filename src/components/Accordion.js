@@ -7,12 +7,12 @@ const Accordion = ({ title, children }) => {
 	return (
 		<motion.article className="bg-slate-100 border border-slate-200 rounded-md overflow-y-hidden pb-4 my-4">
 			<div
-				className={`flex items-center justify-between p-4 pb-0 ${
+				className={`flex items-center justify-between p-4 pb-0 cursor-pointer ${
 					isOpen ? 'mb-0' : 'mb-0'
 				}`}
 				onClick={() => setIsOpen(!isOpen)}
 			>
-				<h3 className="font-bold text-slate-400">{title}</h3>
+				<h3 className="font-bold text-slate-400 select-none">{title}</h3>
 				<button
 					className="p-1 hover:bg-slate-200 rounded-full transition-all"
 					onClick={() => setIsOpen(!isOpen)}
