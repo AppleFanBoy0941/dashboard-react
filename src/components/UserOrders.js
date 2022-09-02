@@ -2,13 +2,13 @@ import useFetch from "../hooks/useFetch";
 
 const UserOrders = ({ data, userObj, customerId }) => {
   const user = userObj.map((obj) => obj.id === customerId);
-  console.log(user);
+  console.log(data);
 
   const { data: users } = useFetch(
-    `http://localhost:3001/users/`
-    // ${data.customer_id}
+    `http://localhost:3001/users`
+    // 
   );
-  console.log(users);
+  console.log( data);
   return (
     <div>
       {/* {users &&
