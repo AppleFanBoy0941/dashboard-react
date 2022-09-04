@@ -19,6 +19,7 @@ const Bestillinger = () => {
   const { data } = useFetch("http://localhost:3001/orders");
   const { data: users } = useFetch("http://localhost:3001/users");
   console.log(data);
+  console.log(data);
 
   return (
     <section className="flex flex-col lg:flex-row">
