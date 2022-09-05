@@ -20,7 +20,7 @@ const Input = ({ label, value, setValue, error, type, id }) => {
 
   return (
     <label
-      className={`relative px-4 pt-5 pb-1 ${
+      className={`relative px-4 pt-5 pb-1 w-full ${
         error ? "bg-red-50" : "bg-slate-50"
       } rounded-md border ${
         isFocused
@@ -47,6 +47,7 @@ const Input = ({ label, value, setValue, error, type, id }) => {
         onBlur={() => !value && setIsFocused(false)}
         id={id}
         name={id}
+        min="0"
       />
     </label>
   );

@@ -5,6 +5,7 @@ import ActionContext from '../../context/ActionContext';
 const QuickActions = ({ screen }) => {
 	const { quickActions } = useContext(ActionContext);
 	const { setOpenSearch } = quickActions.search;
+	const { setOpenAddProduct } = quickActions.addProduct;
 
 	return (
 		<ul
@@ -13,7 +14,7 @@ const QuickActions = ({ screen }) => {
 			}`}
 		>
 			<li>
-				<QuickAction icon="plus" />
+				<QuickAction icon="plus" callback={() => setOpenAddProduct(true)} />
 			</li>
 			<li>
 				<QuickAction icon="minus" />

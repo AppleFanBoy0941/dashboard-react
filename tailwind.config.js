@@ -5,7 +5,11 @@ module.exports = {
 		fontFamily: {
 			sans: ['Manrope', 'sans-serif'],
 		},
-		extend: {},
+		extend: {
+			width: {
+				140: '35rem',
+			},
+		},
 	},
 	plugins: [],
 };
