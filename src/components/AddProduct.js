@@ -7,13 +7,15 @@ import Button from './Button';
 import useNotification from '../hooks/useNotification';
 import NotificationContext from '../context/NotificationContext';
 import TokenContext from '../context/TokenContext';
+import { useNavigate } from 'react-router-dom';
 
-const AddProduct = () => {
+const AddProduct = ({ setIsOpen }) => {
 	const notification = useNotification();
 	const { notifications } = useContext(NotificationContext);
 	const { quickActions } = useContext(ActionContext);
 	const { setOpenAddProduct } = quickActions.addProduct;
 	const { token } = useContext(TokenContext);
+	const navigate = useNavigate();
 
 	const [name, setName] = useState('');
 	const [price, setPrice] = useState('');
@@ -63,6 +65,8 @@ const AddProduct = () => {
 			.then(res => res.json())
 			.then(data => console.log(data))
 			.catch(error => console.log(error));
+		setIsOpen(false);
+		navigate('/varer');
 	};
 
 	return (

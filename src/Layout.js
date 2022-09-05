@@ -32,7 +32,9 @@ const Layout = () => {
 		<>
 			<div className="flex flex-col w-screen h-screen md:flex-row">
 				<AnimatePresence>{openSearch && <Search />}</AnimatePresence>
-				<AnimatePresence>{openAddProduct && <AddProduct />}</AnimatePresence>
+				<AnimatePresence>
+					{openAddProduct && <AddProduct setIsOpen={setOpenAddProduct} />}
+				</AnimatePresence>
 				<NotificationCenter />
 				<Nav />
 				<div className="pt-24 w-full md:pt-0 md:h-screen">
