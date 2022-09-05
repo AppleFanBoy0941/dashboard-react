@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
-const Input = ({ label, value, setValue, error, type, id, max }) => {
+const Input = ({ label, value, setValue, error, type, id }) => {
 	const [isFocused, setIsFocused] = useState(value ? true : false);
 
 	const labelVariants = {
@@ -20,7 +20,7 @@ const Input = ({ label, value, setValue, error, type, id, max }) => {
 
 	return (
 		<label
-			className={`relative px-4 pt-5 pb-1 ${
+			className={`relative px-4 pt-5 pb-1 w-full ${
 				error ? 'bg-red-50' : 'bg-slate-50'
 			} rounded-md border ${
 				isFocused
@@ -47,7 +47,7 @@ const Input = ({ label, value, setValue, error, type, id, max }) => {
 				onBlur={() => !value && setIsFocused(false)}
 				id={id}
 				name={id}
-				maxLength={max || null}
+				min="0"
 			/>
 		</label>
 	);

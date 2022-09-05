@@ -4,38 +4,25 @@ import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import ActionContext from '../context/ActionContext';
 import SearchCat from './SearchCat';
+import BackgroundBlur from './subcomponents/BackgroundBlur';
 
 const Search = () => {
 	const [openFilter, setOpenFilter] = useState(false);
 	const { quickActions } = useContext(ActionContext);
 	const { setOpenSearch } = quickActions.search;
 	const [value, setValue] = useState('');
-	useEffect(() => {
-		const keyDownHandler = e => {
-			if (e.keyCode === 27) {
-				setOpenSearch(false);
-			}
-		};
-		window.addEventListener('keydown', keyDownHandler);
-		return () => {
-			window.removeEventListener('keydown', keyDownHandler);
-		};
-	}, [setOpenSearch]);
 
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-			className="searchBG fixed w-screen h-screen top-0 left-0 bg-slate-50/50 backdrop-blur-lg z-50 flex flex-col items-center"
-			onClick={e =>
-				!e.target.className.search('searchBG') && setOpenSearch(false)
-			}
-		>
+		<BackgroundBlur setIsOpen={setOpenSearch}>
 			<motion.div
 				initial={{ y: 160, opacity: 0 }}
 				animate={{ y: 0, opacity: 1, transition: { delay: 0.25 } }}
-				exit={{ y: 160, opacity: 0, transition: { duration: 0.2 } }}
+				exit={{
+					y: 160,
+					opacity: 0,
+					scale: 0.75,
+					transition: { duration: 0.2 },
+				}}
 				className="fixed top-1/3 flex flex-col gap-4"
 			>
 				<label className="flex items-center gap-4 p-2 pl-4 bg-slate-100 border border-slate-300 rounded-lg">
@@ -81,7 +68,7 @@ const Search = () => {
 					)}
 				</AnimatePresence>
 			</motion.div>
-		</motion.div>
+		</BackgroundBlur>
 	);
 };
 
