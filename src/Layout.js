@@ -9,12 +9,15 @@ import Search from './components/Search';
 import ActionContext from './context/ActionContext';
 import useKeyPress from './hooks/useKeyPress';
 import AddProduct from './components/AddProduct';
+import RemoveProduct from './components/RemoveProduct';
 
 const Layout = () => {
 	const { token } = useContext(TokenContext);
 	const { quickActions } = useContext(ActionContext);
 	const { openSearch, setOpenSearch } = quickActions.search;
 	const { openAddProduct, setOpenAddProduct } = quickActions.addProduct;
+	const { openRemoveProduct, setOpenRemoveProduct } =
+		quickActions.removeProduct;
 
 	useKeyPress('f', ['shiftKey', 'ctrlKey'], () => setOpenSearch(!openSearch));
 	useKeyPress('f', ['shiftKey', 'metaKey'], () => setOpenSearch(!openSearch));
@@ -34,6 +37,11 @@ const Layout = () => {
 				<AnimatePresence>{openSearch && <Search />}</AnimatePresence>
 				<AnimatePresence>
 					{openAddProduct && <AddProduct setIsOpen={setOpenAddProduct} />}
+				</AnimatePresence>
+				<AnimatePresence>
+					{openRemoveProduct && (
+						<RemoveProduct setIsOpen={setOpenRemoveProduct} />
+					)}
 				</AnimatePresence>
 				<NotificationCenter />
 				<Nav />

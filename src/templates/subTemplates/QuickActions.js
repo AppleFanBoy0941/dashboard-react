@@ -6,6 +6,7 @@ const QuickActions = ({ screen }) => {
 	const { quickActions } = useContext(ActionContext);
 	const { setOpenSearch } = quickActions.search;
 	const { setOpenAddProduct } = quickActions.addProduct;
+	const { setOpenRemoveProduct } = quickActions.removeProduct;
 
 	return (
 		<ul
@@ -17,7 +18,7 @@ const QuickActions = ({ screen }) => {
 				<QuickAction icon="plus" callback={() => setOpenAddProduct(true)} />
 			</li>
 			<li>
-				<QuickAction icon="minus" />
+				<QuickAction icon="minus" callback={() => setOpenRemoveProduct(true)} />
 			</li>
 			<li>
 				<QuickAction icon="edit" />
