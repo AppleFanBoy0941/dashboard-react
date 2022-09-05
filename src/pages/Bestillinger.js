@@ -15,11 +15,10 @@ const Bestillinger = () => {
   const [fromDate, setFromDate] = useState(past);
   const [toDate, setToDate] = useState(date);
   const { id, customerId } = useParams();
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data } = useFetch("http://localhost:3001/orders");
   const { data: users } = useFetch("http://localhost:3001/users");
-  console.log(data);
-  console.log(data);
 
   return (
     <section className="flex flex-col lg:flex-row">
@@ -95,7 +94,12 @@ const Bestillinger = () => {
         </div>
       </div>
       <motion.div className="bg-slate-800 w-screen fixed bottom-0 h-32 rounded-t-md">
-        <UserOrders id={id} customerId={customerId} />
+        <UserOrders
+          id={id}
+          customerId={customerId}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
       </motion.div>
     </section>
   );
